@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>木下輝彦 | KP合同会社</title>
+<style>
+  :root{
+    --navy:#12203c;
+    --navy-2:#1b2e52;
+    --gold:#b8933f;
+    --bg:#f5f6f8;
+    --card:#ffffff;
+    --text:#1f2430;
+    --text-light:#5b6472;
+    --border:#e3e6ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:"Yu Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.75;
+  }
+  body:not(.lang-en) .en{display:none;}
+  body.lang-en .ja{display:none;}
+
+  a{color:inherit;text-decoration:none;}
+
+  /* ---- Nav ---- */
+  header.topbar{
+    position:sticky;top:0;z-index:50;
+    background:var(--navy);
+    color:#fff;
+  }
+  .topbar-inner{
+    max-width:960px;margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 20px;
+  }
+  .brand{
+    display:flex;align-items:center;gap:10px;
+    font-weight:700;letter-spacing:.04em;font-size:1rem;
+  }
+  .brand .mark{
+    width:26px;height:26px;
+    background:var(--gold);
+    display:inline-block;
+    transform:rotate(45deg);
+    flex:none;
+  }
+  #langToggle{
+    border:1px solid rgba(255,255,255,.4);
+    background:transparent;color:#fff;
+    padding:6px 14px;border-radius:20px;
+    font-size:.8rem;letter-spacing:.05em;cursor:pointer;
+    transition:background .2s;
+  }
+  #langToggle:hover{background:rgba(255,255,255,.12);}
+
+  /* ---- Hero ---- */
+  .hero{
+    background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
+    color:#fff;
+    padding:64px 20px 72px;
+  }
+  .hero-inner{
+    max-width:960px;margin:0 auto;
+    display:flex;align-items:center;gap:40px;flex-wrap:wrap;
+  }
+  .avatar{
+    width:150px;height:150px;border-radius:50%;
+    background:var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    flex:none;position:relative;overflow:hidden;
+    border:4px solid rgba(255,255,255,.25);
+  }
+  .avatar img{
+    display:none;width:100%;height:100%;object-fit:cover;
+  }
+  .avatar-fallback{
+    font-size:2.4rem;font-weight:700;color:var(--navy);letter-spacing:.05em;
+  }
+  .hero-text{flex:1;min-width:260px;}
+  .hero-title{
+    font-size:.85rem;letter-spacing:.1em;color:var(--gold);
+    text-transform:uppercase;margin-bottom:10px;
+  }
+  .hero-name .ja{font-size:2.2rem;font-weight:700;display:block;letter-spacing:.05em;}
+  .hero-name .en{font-size:1.7rem;font-weight:700;display:block;letter-spacing:.02em;}
+  .hero-role{margin-top:8px;font-size:1.05rem;color:#dfe4ee;}
+  .hero-catch{
+    margin-top:20px;padding:14px 18px;
+    border-left:3px solid var(--gold);
+    background:rgba(255,255,255,.06);
+    font-size:1.05rem;font-weight:600;
+    letter-spacing:.02em;
+  }
+  .hero-actions{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 20px;border-radius:6px;font-size:.9rem;font-weight:600;
+    letter-spacing:.03em;
+  }
+  .btn-primary{background:var(--gold);color:var(--navy);}
+  .btn-outline{border:1px solid rgba(255,255,255,.5);color:#fff;}
+
+  /* ---- Section shell ---- */
+  section{max-width:960px;margin:0 auto;padding:64px 20px;}
+  .section-head{margin-bottom:32px;}
+  .section-head .en-label{
+    font-size:.78rem;letter-spacing:.15em;color:var(--gold);
+    text-transform:uppercase;font-weight:700;
+  }
+  .section-head h2{
+    font-size:1.5rem;font-weight:700;margin-top:6px;color:var(--navy);
+  }
+
+  /* ---- Current roles ---- */
+  .roles-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:16px;
+  }
+  .role-card{
+    background:var(--card);border:1px solid var(--border);
+    border-left:4px solid var(--navy);
+    border-radius:6px;padding:18px 20px;
+  }
+  .role-card .role-org{font-weight:700;color:var(--navy);font-size:1rem;}
+  .role-card .role-pos{color:var(--text-light);font-size:.9rem;margin-top:4px;}
+  .role-card .role-since{margin-top:8px;font-size:.78rem;color:var(--gold);font-weight:700;letter-spacing:.03em;}
+
+  /* ---- Timeline ---- */
+  .timeline{list-style:none;border-left:2px solid var(--border);margin-left:8px;}
+  .timeline-item{position:relative;padding:0 0 22px 26px;}
+  .timeline-item::before{
+    content:"";position:absolute;left:-7px;top:4px;
+    width:12px;height:12px;border-radius:50%;
+    background:var(--gold);border:2px solid var(--card);
+  }
+  .timeline-date{
+    display:block;font-size:.78rem;font-weight:700;color:var(--navy-2);
+    letter-spacing:.03em;margin-bottom:2px;
+  }
+  .timeline-text{font-size:.95rem;color:var(--text);}
+
+  /* ---- Skills ---- */
+  .skills-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:14px;
+  }
+  .skill-card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:8px;padding:16px 18px;
+    font-size:.92rem;font-weight:600;color:var(--navy);
+    display:flex;align-items:center;gap:10px;
+  }
+  .skill-card .dot{
+    width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none;
+  }
+  .skill-note{
+    margin-top:24px;padding:16px 20px;background:var(--navy);color:#fff;
+    border-radius:8px;font-size:.9rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+  }
+  .skill-note strong{color:var(--gold);}
+
+  /* ---- Hobbies ---- */
+  .hobby-list{display:flex;gap:16px;flex-wrap:wrap;}
+  .hobby-card{
+    background:var(--card);border:1px solid var(--border);border-radius:8px;
+    padding:20px 24px;display:flex;align-items:center;gap:14px;min-width:220px;flex:1;
+  }
+  .hobby-icon{
+    width:44px;height:44px;border-radius:50%;background:var(--navy);
+    display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex:none;
+  }
+  .hobby-name{font-weight:700;color:var(--navy);}
+  .hobby-desc{font-size:.82rem;color:var(--text-light);margin-top:2px;}
+
+  /* ---- Contact ---- */
+  .contact-wrap{
+    background:var(--card);border:1px solid var(--border);border-radius:10px;
+    padding:32px;display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;
+  }
+  .contact-block h3{font-size:1.05rem;color:var(--navy);margin-bottom:10px;}
+  .contact-line{font-size:.92rem;color:var(--text);margin-bottom:6px;}
+  .contact-line .label{display:inline-block;width:80px;color:var(--text-light);font-size:.8rem;}
+  .contact-cta{display:flex;flex-direction:column;gap:10px;justify-content:center;}
+
+  footer{
+    text-align:center;padding:28px 20px;color:var(--text-light);font-size:.78rem;
+    border-top:1px solid var(--border);
+  }
+
+  @media (max-width:600px){
+    .hero-inner{flex-direction:column;text-align:center;}
+    .hero-actions{justify-content:center;}
+    .contact-wrap{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="mark" id="markFallback"></span>
+      <img id="logoImg" src="logo.png" alt="KP合同会社"
+           style="display:none;height:28px;width:auto;"
+           onload="this.style.display='inline-block'; document.getElementById('markFallback').style.display='none';">
+      KP合同会社
+    </div>
+    <button id="langToggle" onclick="toggleLang()">EN / 日本語</button>
+  </div>
+</header>
+
+<section class="hero" style="padding-top:56px;">
+  <div class="hero-inner">
+    <div class="avatar">
+      <img id="avatarImg" src="photo.jpg" alt="木下輝彦"
+           onload="this.style.display='block'; document.getElementById('avatarFallback').style.display='none';">
+      <div class="avatar-fallback" id="avatarFallback">輝彦</div>
+    </div>
+    <div class="hero-text">
+      <div class="hero-title">
+        <span class="ja">KP合同会社 代表社員</span>
+        <span class="en">Managing Partner, KP LLC</span>
+      </div>
+      <div class="hero-name">
+        <span class="ja">木下 輝彦</span>
+        <span class="en">Teruhiko Kinoshita</span>
+      </div>
+      <div class="hero-role">
+        <span class="ja">Managing Partner ｜ 経営コンサルティング・ビジネスサポート</span>
+        <span class="en">Business Consulting &amp; Corporate Support</span>
+      </div>
+      <div class="hero-catch">
+        <span class="ja">30社限定。本気の会社だけ、もう1ランク上へ連れていきます。</span>
+        <span class="en">Limited to 30 Companies. For serious businesses only — we'll take you to the next level.</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="tel:09031715064">
+          <span class="ja">電話をかける</span><span class="en">Call</span>
+        </a>
+        <a class="btn btn-outline" href="mailto:kinoshita@kpllc.jp">
+          <span class="ja">メールを送る</span><span class="en">Email</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="roles">
+  <div class="section-head">
+    <div class="en-label">Current Positions</div>
+    <h2><span class="ja">現在の主な役職</span><span class="en">Current Positions</span></h2>
+  </div>
+  <div class="roles-grid">
+    <div class="role-card">
+      <div class="role-org">安全自動車株式会社</div>
+      <div class="role-pos"><span class="ja">監査役(非常勤)</span><span class="en">Auditor (Part-time)</span></div>
+      <div class="role-since"><span class="ja">2020年4月〜</span><span class="en">Since Apr 2020</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-org">株式会社アルファクス・フード・システム</div>
+      <div class="role-pos"><span class="ja">取締役(非常勤)</span><span class="en">Director (Part-time)</span></div>
+      <div class="role-since"><span class="ja">2020年7月〜</span><span class="en">Since Jul 2020</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-org">医療法人社団松成会</div>
+      <div class="role-pos"><span class="ja">監事(非常勤)</span><span class="en">Auditor (Part-time)</span></div>
+      <div class="role-since"><span class="ja">2024年7月〜</span><span class="en">Since Jul 2024</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-org">株式会社TKW M&amp;Aファイナンス会計税務事務所</div>
+      <div class="role-pos"><span class="ja">西日本統括部長</span><span class="en">West Japan General Manager</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-org">株式会社NIKOMIX</div>
+      <div class="role-pos"><span class="ja">エグゼクティブマネージャー</span><span class="en">Executive Manager</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-org">株式会社Turn</div>
+      <div class="role-pos"><span class="ja">管理部長</span><span class="en">General Manager, Administration</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-org">さくらコーポレーション株式会社</div>
+      <div class="role-pos"><span class="ja">ゼネラルマネージャー</span><span class="en">General Manager</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-org">株式会社ビルケア</div>
+      <div class="role-pos"><span class="ja">営業部 部長</span><span class="en">Sales Department Manager</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-org">株式会社LIFIX</div>
+      <div class="role-pos"><span class="ja">ゼネラルマネージャー</span><span class="en">General Manager</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-org">s'lencer</div>
+      <div class="role-pos"><span class="ja">管理部長</span><span class="en">General Manager, Administration</span></div>
+    </div>
+    <div class="role-card">
+      <div class="role-org">KP合同会社</div>
+      <div class="role-pos"><span class="ja">代表社員(常勤)</span><span class="en">Managing Partner (Full-time)</span></div>
+      <div class="role-since"><span class="ja">2022年6月〜</span><span class="en">Since Jun 2022</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="career">
+  <div class="section-head">
+    <div class="en-label">Career</div>
+    <h2><span class="ja">経歴・職歴</span><span class="en">Career History</span></h2>
+  </div>
+  <ul class="timeline">
+    <li class="timeline-item">
+      <span class="timeline-date"><span class="ja">1995年4月</span><span class="en">Apr 1995</span></span>
+      <span class="timeline-text"><span class="ja">株式会社せとうち銀行 入社</span><span class="en">Joined Setouchi Bank</span></span>
+    </li>
+    <li class="timeline-item">
+      <span class="timeline-date"><span class="ja">2007年3月</span><span class="en">Mar 2007</span></span>
+      <span class="timeline-text"><span class="ja">株式会社ジャパンプラットフォーム 代表取締役就任</span><span class="en">Appointed CEO, Japan Platform Co., Ltd.</span></span>
+    </li>
+    <li class="timeline-item">
+      <span class="timeline-date"><span class="ja">2009年9月</span><span class="en">Sep 2009</span></span>
+      <span class="timeline-text"><span class="ja">株式会社西京銀行 入社</span><span class="en">Joined Saikyo Bank</span></span>
+    </li>
+    <li class="timeline-item">
+      <span class="timeline-date"><span class="ja">2019年1月〜2020年3月</span><span class="en">Jan 2019 – Mar 2020</span></span>
+      <span class="timeline-text"><span class="ja">株式会社エコー・システム 取締役</span><span class="en">Director, Echo System Co., Ltd.</span></span>
+    </li>
+    <li class="timeline-item">
+      <span class="timeline-date"><span class="ja">2020年4月〜2021年10月</span><span class="en">Apr 2020 – Oct 2021</span></span>
+      <span class="timeline-text"><span class="ja">株式会社ツバメ・イータイム 取締役</span><span class="en">Director, Tsubame e-Time Co., Ltd.</span></span>
+    </li>
+    <li class="timeline-item">
+      <span class="timeline-date"><span class="ja">2020年4月</span><span class="en">Apr 2020</span></span>
+      <span class="timeline-text"><span class="ja">安全自動車株式会社 監査役就任(非常勤)</span><span class="en">Appointed Auditor (Part-time), Anzen Motor Car Co., Ltd.</span></span>
+    </li>
+    <li class="timeline-item">
+      <span class="timeline-date"><span class="ja">2020年7月</span><span class="en">Jul 2020</span></span>
+      <span class="timeline-text"><span class="ja">株式会社アルファクス・フード・システム 取締役就任(非常勤)</span><span class="en">Appointed Director (Part-time), Alphax Food System Co., Ltd.</span></span>
+    </li>
+    <li class="timeline-item">
+      <span class="timeline-date"><span class="ja">2022年6月</span><span class="en">Jun 2022</span></span>
+      <span class="timeline-text"><span class="ja">KP合同会社 代表社員就任(常勤)</span><span class="en">Appointed Managing Partner (Full-time), KP LLC</span></span>
+    </li>
+    <li class="timeline-item">
+      <span class="timeline-date"><span class="ja">2024年7月</span><span class="en">Jul 2024</span></span>
+      <span class="timeline-text"><span class="ja">医療法人社団松成会 監事就任(非常勤)</span><span class="en">Appointed Auditor (Part-time), Medical Corporation Shoseikai</span></span>
+    </li>
+    <li class="timeline-item">
+      <span class="timeline-date"><span class="ja">現在</span><span class="en">Present</span></span>
+      <span class="timeline-text"><span class="ja">現在に至る</span><span class="en">To present</span></span>
+    </li>
+  </ul>
+</section>
+
+<section id="skills">
+  <div class="section-head">
+    <div class="en-label">Strengths</div>
+    <h2><span class="ja">スキル・強み</span><span class="en">Skills &amp; Strengths</span></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card"><span class="dot"></span><span class="ja">IT(AI)ソリューション支援</span><span class="en">IT (AI) Solution Support</span></div>
+    <div class="skill-card"><span class="dot"></span><span class="ja">人的ネットワーク支援</span><span class="en">Human Network Support</span></div>
+    <div class="skill-card"><span class="dot"></span><span class="ja">事業承継対策・自社株対策</span><span class="en">Business Succession &amp; Shareholder Structuring</span></div>
+    <div class="skill-card"><span class="dot"></span><span class="ja">資金繰り改善・借入金組換</span><span class="en">Cash Flow Improvement &amp; Loan Refinancing</span></div>
+    <div class="skill-card"><span class="dot"></span><span class="ja">保険最適化・退職金構築</span><span class="en">Insurance Optimization &amp; Retirement Benefit Design</span></div>
+    <div class="skill-card"><span class="dot"></span><span class="ja">経理アウトソーシング支援</span><span class="en">Accounting Outsourcing Support</span></div>
+    <div class="skill-card"><span class="dot"></span><span class="ja">不動産会社設立サポート</span><span class="en">Real Estate Company Setup Support</span></div>
+    <div class="skill-card"><span class="dot"></span><span class="ja">商標登録・各種許認可対応</span><span class="en">Trademark Registration &amp; Licensing Support</span></div>
+    <div class="skill-card"><span class="dot"></span><span class="ja">士業ネットワーク(税理士・司法書士・社労士・行政書士・FP・中小企業診断士)</span><span class="en">Network of Specialists (Tax, Legal, Labor, FP, SME Consulting)</span></div>
+    <div class="skill-card"><span class="dot"></span><span class="ja">銀行出身の財務知識・複数社の役員経験</span><span class="en">Banking Background &amp; Multi-Company Officer Experience</span></div>
+  </div>
+  <div class="skill-note">
+    <span><span class="ja">コンサルティング実績</span><span class="en">Consulting Track Record</span></span>
+    <strong><span class="ja">100社以上</span><span class="en">100+ Companies</span></strong>
+  </div>
+</section>
+
+<section id="hobbies">
+  <div class="section-head">
+    <div class="en-label">Interests</div>
+    <h2><span class="ja">趣味・興味</span><span class="en">Hobbies &amp; Interests</span></h2>
+  </div>
+  <div class="hobby-list">
+    <div class="hobby-card">
+      <div class="hobby-icon">⚽</div>
+      <div>
+        <div class="hobby-name"><span class="ja">フットサル</span><span class="en">Futsal</span></div>
+        <div class="hobby-desc"><span class="ja">チームスポーツでリフレッシュ</span><span class="en">Team sport for staying active</span></div>
+      </div>
+    </div>
+    <div class="hobby-card">
+      <div class="hobby-icon">🐺</div>
+      <div>
+        <div class="hobby-name"><span class="ja">人狼ゲーム</span><span class="en">Werewolf (Social Deduction Game)</span></div>
+        <div class="hobby-desc"><span class="ja">論理と対話を楽しむボードゲーム</span><span class="en">A game of logic and conversation</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-head">
+    <div class="en-label">Contact</div>
+    <h2><span class="ja">連絡先</span><span class="en">Contact</span></h2>
+  </div>
+  <div class="contact-wrap">
+    <div class="contact-block">
+      <h3>KP合同会社 <span class="en">/ KP LLC</span></h3>
+      <div class="contact-line"><span class="label ja">本社</span><span class="label en">HQ</span>〒731-0103 <span class="ja">広島県広島市安佐南区緑井二丁目1番2号</span><span class="en">2-1-2 Midorii, Asaminami-ku, Hiroshima</span></div>
+      <div class="contact-line"><span class="label ja">本店</span><span class="label en">Reg. Office</span>〒731-0154 <span class="ja">広島県広島市安佐南区上安二丁目2番39-17号</span><span class="en">2-2-39-17 Kamiyasu, Asaminami-ku, Hiroshima</span></div>
+      <div class="contact-line"><span class="label ja">電話</span><span class="label en">Tel</span>090-3171-5064</div>
+      <div class="contact-line"><span class="label ja">メール</span><span class="label en">Email</span>kinoshita@kpllc.jp</div>
+    </div>
+    <div class="contact-cta">
+      <a class="btn btn-primary" style="color:var(--navy);" href="tel:09031715064"><span class="ja">今すぐ電話</span><span class="en">Call Now</span></a>
+      <a class="btn" style="background:var(--navy);color:#fff;" href="mailto:kinoshita@kpllc.jp"><span class="ja">メールで問い合わせ</span><span class="en">Contact by Email</span></a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="ja">&copy; 2026 KP合同会社 木下輝彦</span>
+  <span class="en">&copy; 2026 Teruhiko Kinoshita / KP LLC</span>
+</footer>
+
+<script>
+  function toggleLang(){
+    document.body.classList.toggle('lang-en');
+  }
+</script>
+
+</body>
+</html>
