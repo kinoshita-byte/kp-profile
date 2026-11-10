@@ -1,436 +1,342 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>木下輝彦 | KP合同会社</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KP合同会社｜経営に使える会計</title>
+<meta name="description" content="KP合同会社は、広島の経営コンサルティング・M&Aアドバイザリー会社です。元銀行員の経営コンサルタントが、毎月の数字を経営の判断材料に変える「経営に使える会計」を支援します。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="KP合同会社｜経営に使える会計">
+<meta property="og:description" content="KP合同会社は、広島の経営コンサルティング・M&Aアドバイザリー会社です。元銀行員の経営コンサルタントが、毎月の数字を経営の判断材料に変える「経営に使える会計」を支援します。">
+<meta property="og:locale" content="ja_JP">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
 <style>
-  :root{
-    --navy:#12203c;
-    --navy-2:#1b2e52;
-    --gold:#b8933f;
-    --bg:#f5f6f8;
-    --card:#ffffff;
-    --text:#1f2430;
-    --text-light:#5b6472;
-    --border:#e3e6ec;
-  }
-  *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:"Yu Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP","Segoe UI",sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.75;
-  }
-  body:not(.lang-en) .en{display:none;}
-  body.lang-en .ja{display:none;}
-
-  a{color:inherit;text-decoration:none;}
-
-  /* ---- Nav ---- */
-  header.topbar{
-    position:sticky;top:0;z-index:50;
-    background:var(--navy);
-    color:#fff;
-  }
-  .topbar-inner{
-    max-width:960px;margin:0 auto;
-    display:flex;align-items:center;justify-content:space-between;
-    padding:14px 20px;
-  }
-  .brand{
-    display:flex;align-items:center;gap:10px;
-    font-weight:700;letter-spacing:.04em;font-size:1rem;
-  }
-  .brand .mark{
-    width:26px;height:26px;
-    background:var(--gold);
-    display:inline-block;
-    transform:rotate(45deg);
-    flex:none;
-  }
-  #langToggle{
-    border:1px solid rgba(255,255,255,.4);
-    background:transparent;color:#fff;
-    padding:6px 14px;border-radius:20px;
-    font-size:.8rem;letter-spacing:.05em;cursor:pointer;
-    transition:background .2s;
-  }
-  #langToggle:hover{background:rgba(255,255,255,.12);}
-
-  /* ---- Hero ---- */
-  .hero{
-    background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 100%);
-    color:#fff;
-    padding:64px 20px 72px;
-  }
-  .hero-inner{
-    max-width:960px;margin:0 auto;
-    display:flex;align-items:center;gap:40px;flex-wrap:wrap;
-  }
-  .avatar{
-    width:150px;height:150px;border-radius:50%;
-    background:var(--gold);
-    display:flex;align-items:center;justify-content:center;
-    flex:none;position:relative;overflow:hidden;
-    border:4px solid rgba(255,255,255,.25);
-  }
-  .avatar img{
-    display:none;width:100%;height:100%;object-fit:cover;
-  }
-  .avatar-fallback{
-    font-size:2.4rem;font-weight:700;color:var(--navy);letter-spacing:.05em;
-  }
-  .hero-text{flex:1;min-width:260px;}
-  .hero-title{
-    font-size:.85rem;letter-spacing:.1em;color:var(--gold);
-    text-transform:uppercase;margin-bottom:10px;
-  }
-  .hero-name .ja{font-size:2.2rem;font-weight:700;display:block;letter-spacing:.05em;}
-  .hero-name .en{font-size:1.7rem;font-weight:700;display:block;letter-spacing:.02em;}
-  .hero-role{margin-top:8px;font-size:1.05rem;color:#dfe4ee;}
-  .hero-catch{
-    margin-top:20px;padding:14px 18px;
-    border-left:3px solid var(--gold);
-    background:rgba(255,255,255,.06);
-    font-size:1.05rem;font-weight:600;
-    letter-spacing:.02em;
-  }
-  .hero-actions{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;}
-  .btn{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:10px 20px;border-radius:6px;font-size:.9rem;font-weight:600;
-    letter-spacing:.03em;
-  }
-  .btn-primary{background:var(--gold);color:var(--navy);}
-  .btn-outline{border:1px solid rgba(255,255,255,.5);color:#fff;}
-
-  /* ---- Section shell ---- */
-  section{max-width:960px;margin:0 auto;padding:64px 20px;}
-  .section-head{margin-bottom:32px;}
-  .section-head .en-label{
-    font-size:.78rem;letter-spacing:.15em;color:var(--gold);
-    text-transform:uppercase;font-weight:700;
-  }
-  .section-head h2{
-    font-size:1.5rem;font-weight:700;margin-top:6px;color:var(--navy);
-  }
-
-  /* ---- Current roles ---- */
-  .roles-grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:16px;
-  }
-  .role-card{
-    background:var(--card);border:1px solid var(--border);
-    border-left:4px solid var(--navy);
-    border-radius:6px;padding:18px 20px;
-  }
-  .role-card .role-org{font-weight:700;color:var(--navy);font-size:1rem;}
-  .role-card .role-pos{color:var(--text-light);font-size:.9rem;margin-top:4px;}
-  .role-card .role-since{margin-top:8px;font-size:.78rem;color:var(--gold);font-weight:700;letter-spacing:.03em;}
-
-  /* ---- Timeline ---- */
-  .timeline{list-style:none;border-left:2px solid var(--border);margin-left:8px;}
-  .timeline-item{position:relative;padding:0 0 22px 26px;}
-  .timeline-item::before{
-    content:"";position:absolute;left:-7px;top:4px;
-    width:12px;height:12px;border-radius:50%;
-    background:var(--gold);border:2px solid var(--card);
-  }
-  .timeline-date{
-    display:block;font-size:.78rem;font-weight:700;color:var(--navy-2);
-    letter-spacing:.03em;margin-bottom:2px;
-  }
-  .timeline-text{font-size:.95rem;color:var(--text);}
-
-  /* ---- Skills ---- */
-  .skills-grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:14px;
-  }
-  .skill-card{
-    background:var(--card);border:1px solid var(--border);
-    border-radius:8px;padding:16px 18px;
-    font-size:.92rem;font-weight:600;color:var(--navy);
-    display:flex;align-items:center;gap:10px;
-  }
-  .skill-card .dot{
-    width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none;
-  }
-  .skill-note{
-    margin-top:24px;padding:16px 20px;background:var(--navy);color:#fff;
-    border-radius:8px;font-size:.9rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
-  }
-  .skill-note strong{color:var(--gold);}
-
-  /* ---- Hobbies ---- */
-  .hobby-list{display:flex;gap:16px;flex-wrap:wrap;}
-  .hobby-card{
-    background:var(--card);border:1px solid var(--border);border-radius:8px;
-    padding:20px 24px;display:flex;align-items:center;gap:14px;min-width:220px;flex:1;
-  }
-  .hobby-icon{
-    width:44px;height:44px;border-radius:50%;background:var(--navy);
-    display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex:none;
-  }
-  .hobby-name{font-weight:700;color:var(--navy);}
-  .hobby-desc{font-size:.82rem;color:var(--text-light);margin-top:2px;}
-
-  /* ---- Contact ---- */
-  .contact-wrap{
-    background:var(--card);border:1px solid var(--border);border-radius:10px;
-    padding:32px;display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;
-  }
-  .contact-block h3{font-size:1.05rem;color:var(--navy);margin-bottom:10px;}
-  .contact-line{font-size:.92rem;color:var(--text);margin-bottom:6px;}
-  .contact-line .label{display:inline-block;width:80px;color:var(--text-light);font-size:.8rem;}
-  .contact-cta{display:flex;flex-direction:column;gap:10px;justify-content:center;}
-
-  footer{
-    text-align:center;padding:28px 20px;color:var(--text-light);font-size:.78rem;
-    border-top:1px solid var(--border);
-  }
-
-  @media (max-width:600px){
-    .hero-inner{flex-direction:column;text-align:center;}
-    .hero-actions{justify-content:center;}
-    .contact-wrap{flex-direction:column;}
-  }
+html{scroll-behavior:smooth}
+body{margin:0}
+*{box-sizing:border-box}
+a{color:#12203c}a:hover{color:#7d5f17}
+img{max-width:100%}
 </style>
 </head>
 <body>
+<div style="background: #f4f5f7; color: #1a2233; font-family: 'Noto Sans JP', 'Yu Gothic', 'Hiragino Kaku Gothic ProN', sans-serif; line-height: 1.8; font-size: 16px">
 
-<header class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">
-      <span class="mark" id="markFallback"></span>
-      <img id="logoImg" src="logo.png" alt="KP合同会社"
-           style="display:none;height:28px;width:auto;"
-           onload="this.style.display='inline-block'; document.getElementById('markFallback').style.display='none';">
-      KP合同会社
+  <header style="background: #ffffff; border-bottom: 1px solid #dfe3ea">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px">
+      <a href="#top" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #12203c">
+        <img src="assets/kp-logo-dark.png" alt="KP LLC ロゴ" style="height: 44px; width: auto; display: block">
+        <span style="font-weight: 700; font-size: 18px; letter-spacing: 0.06em">KP合同会社</span>
+      </a>
+      <nav aria-label="メインメニュー" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 28px; font-size: 14px; font-weight: 500">
+        <a href="#concept" style="text-decoration: none; padding: 12px 0">経営に使える会計</a>
+        <a href="#service" style="text-decoration: none; padding: 12px 0">サービス</a>
+        <a href="#profile" style="text-decoration: none; padding: 12px 0">代表プロフィール</a>
+        <a href="#company" style="text-decoration: none; padding: 12px 0">会社概要</a>
+        <a href="#contact" style="text-decoration: none; padding: 11px 22px; background: #12203c; color: #ffffff; border-radius: 4px; font-weight: 700">ご相談はこちら</a>
+      </nav>
     </div>
-    <button id="langToggle" onclick="toggleLang()">EN / 日本語</button>
-  </div>
-</header>
+  </header>
 
-<section class="hero" style="padding-top:56px;">
-  <div class="hero-inner">
-    <div class="avatar">
-      <img id="avatarImg" src="photo.jpg" alt="木下輝彦"
-           onload="this.style.display='block'; document.getElementById('avatarFallback').style.display='none';">
-      <div class="avatar-fallback" id="avatarFallback">輝彦</div>
-    </div>
-    <div class="hero-text">
-      <div class="hero-title">
-        <span class="ja">KP合同会社 代表社員</span>
-        <span class="en">Managing Partner, KP LLC</span>
+  <section id="top" style="background: #12203c; color: #ffffff">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 88px 24px 96px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
+      <div style="flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 28px">
+        <p style="margin: 0; font-size: 15px; font-weight: 700; letter-spacing: 0.2em; color: #c9a24a">経営に使える会計</p>
+        <h1 style="margin: 0; font-weight: 900; line-height: 1.35; letter-spacing: 0.02em; font-size: clamp(34px, 5.2vw, 62px)">30社限定。<br>本気の会社だけ、<br>もう1ランク上へ<br>連れていきます。</h1>
+        <p style="margin: 0; font-size: 17px; line-height: 2; color: #d5dbe8; max-width: 560px">決算書を、年に一度の報告書で終わらせない。元銀行員の経営コンサルタントが、毎月の数字を経営の判断材料に変えます。</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px">
+          <a href="#contact" style="display: inline-block; text-decoration: none; padding: 15px 30px; border-radius: 4px; font-weight: 700; font-size: 16px; color: #12203c; background: #c9a24a">まずは相談する</a>
+          <a href="#service" style="display: inline-block; text-decoration: none; padding: 14px 30px; border-radius: 4px; font-weight: 700; font-size: 16px; color: #ffffff; border: 1px solid #8f9ab3">サービスを見る</a>
+        </div>
       </div>
-      <div class="hero-name">
-        <span class="ja">木下 輝彦</span>
-        <span class="en">Teruhiko Kinoshita</span>
-      </div>
-      <div class="hero-role">
-        <span class="ja">Managing Partner ｜ 経営コンサルティング・ビジネスサポート</span>
-        <span class="en">Business Consulting &amp; Corporate Support</span>
-      </div>
-      <div class="hero-catch">
-        <span class="ja">30社限定。本気の会社だけ、もう1ランク上へ連れていきます。</span>
-        <span class="en">Limited to 30 Companies. For serious businesses only — we'll take you to the next level.</span>
-      </div>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="tel:09031715064">
-          <span class="ja">電話をかける</span><span class="en">Call</span>
-        </a>
-        <a class="btn btn-outline" href="mailto:kinoshita@kpllc.jp">
-          <span class="ja">メールを送る</span><span class="en">Email</span>
-        </a>
-      </div>
+      <figure style="flex: 1 1 300px; max-width: 380px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px">
+        <img src="assets/kp-photo.jpg" alt="フットサルコートに立つ木下輝彦の後ろ姿" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 30%; border-radius: 4px; display: block">
+        <figcaption style="font-size: 13px; color: #d5dbe8; letter-spacing: 0.04em">Managing Partner　木下 輝彦</figcaption>
+      </figure>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="roles">
-  <div class="section-head">
-    <div class="en-label">Current Positions</div>
-    <h2><span class="ja">現在の主な役職</span><span class="en">Current Positions</span></h2>
-  </div>
-  <div class="roles-grid">
-    <div class="role-card">
-      <div class="role-org">安全自動車株式会社</div>
-      <div class="role-pos"><span class="ja">監査役(非常勤)</span><span class="en">Auditor (Part-time)</span></div>
-      <div class="role-since"><span class="ja">2020年4月〜</span><span class="en">Since Apr 2020</span></div>
-    </div>
-    <div class="role-card">
-      <div class="role-org">株式会社アルファクス・フード・システム</div>
-      <div class="role-pos"><span class="ja">取締役(非常勤)</span><span class="en">Director (Part-time)</span></div>
-      <div class="role-since"><span class="ja">2020年7月〜</span><span class="en">Since Jul 2020</span></div>
-    </div>
-    <div class="role-card">
-      <div class="role-org">医療法人社団松成会</div>
-      <div class="role-pos"><span class="ja">監事(非常勤)</span><span class="en">Auditor (Part-time)</span></div>
-      <div class="role-since"><span class="ja">2024年7月〜</span><span class="en">Since Jul 2024</span></div>
-    </div>
-    <div class="role-card">
-      <div class="role-org">株式会社TKW M&amp;Aファイナンス会計税務事務所</div>
-      <div class="role-pos"><span class="ja">西日本統括部長</span><span class="en">West Japan General Manager</span></div>
-    </div>
-    <div class="role-card">
-      <div class="role-org">株式会社NIKOMIX</div>
-      <div class="role-pos"><span class="ja">エグゼクティブマネージャー</span><span class="en">Executive Manager</span></div>
-    </div>
-    <div class="role-card">
-      <div class="role-org">株式会社Turn</div>
-      <div class="role-pos"><span class="ja">管理部長</span><span class="en">General Manager, Administration</span></div>
-    </div>
-    <div class="role-card">
-      <div class="role-org">さくらコーポレーション株式会社</div>
-      <div class="role-pos"><span class="ja">ゼネラルマネージャー</span><span class="en">General Manager</span></div>
-    </div>
-    <div class="role-card">
-      <div class="role-org">株式会社ビルケア</div>
-      <div class="role-pos"><span class="ja">営業部 部長</span><span class="en">Sales Department Manager</span></div>
-    </div>
-    <div class="role-card">
-      <div class="role-org">株式会社LIFIX</div>
-      <div class="role-pos"><span class="ja">ゼネラルマネージャー</span><span class="en">General Manager</span></div>
-    </div>
-    <div class="role-card">
-      <div class="role-org">s'lencer</div>
-      <div class="role-pos"><span class="ja">管理部長</span><span class="en">General Manager, Administration</span></div>
-    </div>
-    <div class="role-card">
-      <div class="role-org">KP合同会社</div>
-      <div class="role-pos"><span class="ja">代表社員(常勤)</span><span class="en">Managing Partner (Full-time)</span></div>
-      <div class="role-since"><span class="ja">2022年6月〜</span><span class="en">Since Jun 2022</span></div>
-    </div>
-  </div>
-</section>
-
-<section id="career">
-  <div class="section-head">
-    <div class="en-label">Career</div>
-    <h2><span class="ja">経歴・職歴</span><span class="en">Career History</span></h2>
-  </div>
-  <ul class="timeline">
-    <li class="timeline-item">
-      <span class="timeline-date"><span class="ja">1995年4月</span><span class="en">Apr 1995</span></span>
-      <span class="timeline-text"><span class="ja">株式会社せとうち銀行 入社</span><span class="en">Joined Setouchi Bank</span></span>
-    </li>
-    <li class="timeline-item">
-      <span class="timeline-date"><span class="ja">2007年3月</span><span class="en">Mar 2007</span></span>
-      <span class="timeline-text"><span class="ja">株式会社ジャパンプラットフォーム 代表取締役就任</span><span class="en">Appointed CEO, Japan Platform Co., Ltd.</span></span>
-    </li>
-    <li class="timeline-item">
-      <span class="timeline-date"><span class="ja">2009年9月</span><span class="en">Sep 2009</span></span>
-      <span class="timeline-text"><span class="ja">株式会社西京銀行 入社</span><span class="en">Joined Saikyo Bank</span></span>
-    </li>
-    <li class="timeline-item">
-      <span class="timeline-date"><span class="ja">2019年1月〜2020年3月</span><span class="en">Jan 2019 – Mar 2020</span></span>
-      <span class="timeline-text"><span class="ja">株式会社エコー・システム 取締役</span><span class="en">Director, Echo System Co., Ltd.</span></span>
-    </li>
-    <li class="timeline-item">
-      <span class="timeline-date"><span class="ja">2020年4月〜2021年10月</span><span class="en">Apr 2020 – Oct 2021</span></span>
-      <span class="timeline-text"><span class="ja">株式会社ツバメ・イータイム 取締役</span><span class="en">Director, Tsubame e-Time Co., Ltd.</span></span>
-    </li>
-    <li class="timeline-item">
-      <span class="timeline-date"><span class="ja">2020年4月</span><span class="en">Apr 2020</span></span>
-      <span class="timeline-text"><span class="ja">安全自動車株式会社 監査役就任(非常勤)</span><span class="en">Appointed Auditor (Part-time), Anzen Motor Car Co., Ltd.</span></span>
-    </li>
-    <li class="timeline-item">
-      <span class="timeline-date"><span class="ja">2020年7月</span><span class="en">Jul 2020</span></span>
-      <span class="timeline-text"><span class="ja">株式会社アルファクス・フード・システム 取締役就任(非常勤)</span><span class="en">Appointed Director (Part-time), Alphax Food System Co., Ltd.</span></span>
-    </li>
-    <li class="timeline-item">
-      <span class="timeline-date"><span class="ja">2022年6月</span><span class="en">Jun 2022</span></span>
-      <span class="timeline-text"><span class="ja">KP合同会社 代表社員就任(常勤)</span><span class="en">Appointed Managing Partner (Full-time), KP LLC</span></span>
-    </li>
-    <li class="timeline-item">
-      <span class="timeline-date"><span class="ja">2024年7月</span><span class="en">Jul 2024</span></span>
-      <span class="timeline-text"><span class="ja">医療法人社団松成会 監事就任(非常勤)</span><span class="en">Appointed Auditor (Part-time), Medical Corporation Shoseikai</span></span>
-    </li>
-    <li class="timeline-item">
-      <span class="timeline-date"><span class="ja">現在</span><span class="en">Present</span></span>
-      <span class="timeline-text"><span class="ja">現在に至る</span><span class="en">To present</span></span>
-    </li>
-  </ul>
-</section>
-
-<section id="skills">
-  <div class="section-head">
-    <div class="en-label">Strengths</div>
-    <h2><span class="ja">スキル・強み</span><span class="en">Skills &amp; Strengths</span></h2>
-  </div>
-  <div class="skills-grid">
-    <div class="skill-card"><span class="dot"></span><span class="ja">IT(AI)ソリューション支援</span><span class="en">IT (AI) Solution Support</span></div>
-    <div class="skill-card"><span class="dot"></span><span class="ja">人的ネットワーク支援</span><span class="en">Human Network Support</span></div>
-    <div class="skill-card"><span class="dot"></span><span class="ja">事業承継対策・自社株対策</span><span class="en">Business Succession &amp; Shareholder Structuring</span></div>
-    <div class="skill-card"><span class="dot"></span><span class="ja">資金繰り改善・借入金組換</span><span class="en">Cash Flow Improvement &amp; Loan Refinancing</span></div>
-    <div class="skill-card"><span class="dot"></span><span class="ja">保険最適化・退職金構築</span><span class="en">Insurance Optimization &amp; Retirement Benefit Design</span></div>
-    <div class="skill-card"><span class="dot"></span><span class="ja">経理アウトソーシング支援</span><span class="en">Accounting Outsourcing Support</span></div>
-    <div class="skill-card"><span class="dot"></span><span class="ja">士業ネットワーク(税理士・司法書士・社労士・行政書士・FP・中小企業診断士)</span><span class="en">Network of Specialists (Tax, Legal, Labor, FP, SME Consulting)</span></div>
-    <div class="skill-card"><span class="dot"></span><span class="ja">銀行出身の財務知識・複数社の役員経験</span><span class="en">Banking Background &amp; Multi-Company Officer Experience</span></div>
-  </div>
-  <div class="skill-note">
-    <span><span class="ja">コンサルティング実績</span><span class="en">Consulting Track Record</span></span>
-    <strong><span class="ja">100社以上</span><span class="en">100+ Companies</span></strong>
-  </div>
-</section>
-
-<section id="hobbies">
-  <div class="section-head">
-    <div class="en-label">Interests</div>
-    <h2><span class="ja">趣味・興味</span><span class="en">Hobbies &amp; Interests</span></h2>
-  </div>
-  <div class="hobby-list">
-    <div class="hobby-card">
-      <div class="hobby-icon">⚽</div>
-      <div>
-        <div class="hobby-name"><span class="ja">フットサル</span><span class="en">Futsal</span></div>
-        <div class="hobby-desc"><span class="ja">チームスポーツでリフレッシュ</span><span class="en">Team sport for staying active</span></div>
+  <section id="concept" style="background: #ffffff">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 48px">
+      <div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+        <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: #7d5f17">CONCEPT</p>
+        <h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 38px); font-weight: 900; line-height: 1.5; color: #12203c">「経営に使える会計」とは</h2>
+        <p style="margin: 0; font-size: 16px; color: #3d4658">税金を計算するための会計と、経営を決めるための会計は、同じ数字でも見方が違います。KP合同会社は後者に絞って、経営者のとなりで数字を読みます。</p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 24px">
+        <div style="flex: 1 1 280px; border-top: 3px solid #12203c; padding-top: 22px; display: flex; flex-direction: column; gap: 10px">
+          <p style="margin: 0; font-size: 34px; font-weight: 900; line-height: 1; color: #7d5f17">01</p>
+          <h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #12203c">毎月、同じ形で数字を見る</h3>
+          <p style="margin: 0; font-size: 15px; color: #3d4658">試算表を経営管理ブックとダッシュボードに整え、売上・利益・資金の動きを毎月同じ形で確認します。</p>
+        </div>
+        <div style="flex: 1 1 280px; border-top: 3px solid #12203c; padding-top: 22px; display: flex; flex-direction: column; gap: 10px">
+          <p style="margin: 0; font-size: 34px; font-weight: 900; line-height: 1; color: #7d5f17">02</p>
+          <h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #12203c">銀行が見るところを、先に見る</h3>
+          <p style="margin: 0; font-size: 15px; color: #3d4658">融資の現場にいた目線で、決算書と資金繰りを点検します。金融機関への説明資料づくりまで伴走します。</p>
+        </div>
+        <div style="flex: 1 1 280px; border-top: 3px solid #12203c; padding-top: 22px; display: flex; flex-direction: column; gap: 10px">
+          <p style="margin: 0; font-size: 34px; font-weight: 900; line-height: 1; color: #7d5f17">03</p>
+          <h3 style="margin: 0; font-size: 20px; font-weight: 700; color: #12203c">数字を、次の一手に変える</h3>
+          <p style="margin: 0; font-size: 15px; color: #3d4658">月次ミーティングで数字の意味を言葉にし、「来月なにをするか」まで決めて終わります。</p>
+        </div>
       </div>
     </div>
-    <div class="hobby-card">
-      <div class="hobby-icon">🐺</div>
-      <div>
-        <div class="hobby-name"><span class="ja">人狼ゲーム</span><span class="en">Werewolf (Social Deduction Game)</span></div>
-        <div class="hobby-desc"><span class="ja">論理と対話を楽しむボードゲーム</span><span class="en">A game of logic and conversation</span></div>
+  </section>
+
+  <section id="service">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 48px">
+      <div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+        <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: #7d5f17">SERVICE</p>
+        <h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 38px); font-weight: 900; line-height: 1.5; color: #12203c">サービス</h2>
+        <p style="margin: 0; font-size: 16px; color: #3d4658">顧問契約を軸に、会社の状況に合わせて必要な支援を組み合わせます。</p>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 20px">
+        <div style="flex: 1 1 240px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; line-height: 1.5; color: #12203c">月次経営管理</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">経営管理ブックとダッシュボードの作成、月次ミーティングの運営。</p>
+        </div>
+        <div style="flex: 1 1 240px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; line-height: 1.5; color: #12203c">資金繰り改善・借入金組換</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">資金繰りの見える化、借入の組み直し、金融機関向け資料の作成。</p>
+        </div>
+        <div style="flex: 1 1 240px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; line-height: 1.5; color: #12203c">事業承継・自社株対策</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">後継者への引き継ぎ方と、自社株の扱いを整理します。</p>
+        </div>
+        <div style="flex: 1 1 240px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; line-height: 1.5; color: #12203c">M&amp;Aアドバイザリー</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">会社や事業の譲渡・譲受を、検討の入口から支援します。</p>
+        </div>
+        <div style="flex: 1 1 240px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; line-height: 1.5; color: #12203c">経理アウトソーシング支援</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">経理の流れを整え、数字が早く正しく出る体制をつくります。</p>
+        </div>
+        <div style="flex: 1 1 240px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; line-height: 1.5; color: #12203c">IT（AI）ソリューション支援</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">AIやITツールを、日々の業務で使える形で導入します。</p>
+        </div>
+        <div style="flex: 1 1 240px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; line-height: 1.5; color: #12203c">退職金・勇退資金構築</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">役員・従業員の退職金と、経営者の勇退資金を計画的に準備します。</p>
+        </div>
+        <div style="flex: 1 1 240px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 10px">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; line-height: 1.5; color: #12203c">士業・人的ネットワーク</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">税理士、司法書士、社労士、行政書士、FP、中小企業診断士をおつなぎします。</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="contact">
-  <div class="section-head">
-    <div class="en-label">Contact</div>
-    <h2><span class="ja">連絡先</span><span class="en">Contact</span></h2>
-  </div>
-  <div class="contact-wrap">
-    <div class="contact-block">
-      <h3>KP合同会社 <span class="en">/ KP LLC</span></h3>
-      <div class="contact-line"><span class="label ja">本社</span><span class="label en">HQ</span>〒731-0103 <span class="ja">広島県広島市安佐南区緑井二丁目1番2号</span><span class="en">2-1-2 Midorii, Asaminami-ku, Hiroshima</span></div>
-      <div class="contact-line"><span class="label ja">本店</span><span class="label en">Reg. Office</span>〒731-0154 <span class="ja">広島県広島市安佐南区上安二丁目2番39-17号</span><span class="en">2-2-39-17 Kamiyasu, Asaminami-ku, Hiroshima</span></div>
-      <div class="contact-line"><span class="label ja">電話</span><span class="label en">Tel</span>090-3171-5064</div>
-      <div class="contact-line"><span class="label ja">メール</span><span class="label en">Email</span>kinoshita@kpllc.jp</div>
+  <section id="profile" style="background: #ffffff">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 56px">
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: #7d5f17">PROFILE</p>
+        <h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 38px); font-weight: 900; line-height: 1.5; color: #12203c">代表プロフィール</h2>
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 48px">
+        <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <p style="margin: 0; font-size: 14px; font-weight: 500; color: #3d4658">KP合同会社　Managing Partner</p>
+            <p style="margin: 0; font-size: 30px; font-weight: 900; letter-spacing: 0.08em; color: #12203c">木下 輝彦</p>
+            <p style="margin: 0; font-size: 14px; letter-spacing: 0.08em; color: #3d4658">Teruhiko Kinoshita</p>
+          </div>
+          <p style="margin: 0; font-size: 16px; color: #1a2233">銀行員として約20年、融資の現場で中小企業の決算書と向き合ってきました。貸す側で見てきた経験をもとに、いまは経営者の側に立って、会計を経営に使える形に整える仕事をしています。</p>
+          <p style="margin: 0; font-size: 16px; color: #1a2233">複数の会社で役員や管理部門の責任者を兼ねており、外から助言するだけでなく、会社の中に入って一緒に動きます。</p>
+          <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; padding: 16px 0; border-top: 1px solid #dfe3ea; border-bottom: 1px solid #dfe3ea">
+            <p style="margin: 0; font-size: 14px; font-weight: 700; color: #12203c">コンサルティング実績</p>
+            <p style="margin: 0; font-size: 28px; font-weight: 900; line-height: 1.2; color: #7d5f17">100社以上</p>
+          </div>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">趣味：フットサル、人狼ゲーム</p>
+        </div>
+
+        <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #12203c">経歴</h3>
+          <div style="display: flex; flex-direction: column">
+            <div style="display: flex; gap: 20px; padding: 12px 0; border-top: 1px solid #dfe3ea">
+              <p style="margin: 0; flex: none; width: 96px; font-size: 14px; font-weight: 700; color: #7d5f17">1995年4月</p>
+              <p style="margin: 0; font-size: 15px">株式会社せとうち銀行（現・もみじ銀行）入社</p>
+            </div>
+            <div style="display: flex; gap: 20px; padding: 12px 0; border-top: 1px solid #dfe3ea">
+              <p style="margin: 0; flex: none; width: 96px; font-size: 14px; font-weight: 700; color: #7d5f17">2007年3月</p>
+              <p style="margin: 0; font-size: 15px">株式会社ジャパンプラットフォーム 代表取締役</p>
+            </div>
+            <div style="display: flex; gap: 20px; padding: 12px 0; border-top: 1px solid #dfe3ea">
+              <p style="margin: 0; flex: none; width: 96px; font-size: 14px; font-weight: 700; color: #7d5f17">2009年9月</p>
+              <p style="margin: 0; font-size: 15px">株式会社西京銀行 入社</p>
+            </div>
+            <div style="display: flex; gap: 20px; padding: 12px 0; border-top: 1px solid #dfe3ea">
+              <p style="margin: 0; flex: none; width: 96px; font-size: 14px; font-weight: 700; color: #7d5f17">2019年1月</p>
+              <p style="margin: 0; font-size: 15px">株式会社エコー・システム 取締役</p>
+            </div>
+            <div style="display: flex; gap: 20px; padding: 12px 0; border-top: 1px solid #dfe3ea">
+              <p style="margin: 0; flex: none; width: 96px; font-size: 14px; font-weight: 700; color: #7d5f17">2020年4月</p>
+              <p style="margin: 0; font-size: 15px">株式会社ツバメ・イータイム 取締役</p>
+            </div>
+            <div style="display: flex; gap: 20px; padding: 12px 0; border-top: 1px solid #dfe3ea; border-bottom: 1px solid #dfe3ea">
+              <p style="margin: 0; flex: none; width: 96px; font-size: 14px; font-weight: 700; color: #7d5f17">2022年6月</p>
+              <p style="margin: 0; font-size: 15px">KP合同会社 設立、Managing Partner 就任</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 20px">
+        <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #12203c">現在の役職</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 0 32px">
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">KP合同会社</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">Managing Partner</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">株式会社TKW M&amp;Aファイナンス会計税務事務所</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">西日本統括部長</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">株式会社アルファクス・フード・システム</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">取締役</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">医療法人社団松成会</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">監事</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">株式会社NIKOMIX</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">広島オフィス Executive Manager</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">株式会社Turn</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">管理部長</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">株式会社サイレンサー</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">管理部長</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">さくらコーポレーション株式会社</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">ゼネラルマネージャー</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">株式会社LIFIX</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">ゼネラルマネージャー</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">LEOS</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">General Manager</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">株式会社ビルケア</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">営業部 部長</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">ATORA</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">マネージャー</p>
+          </div>
+          <div style="flex: 1 1 300px; padding: 14px 0; border-top: 1px solid #dfe3ea; display: flex; flex-direction: column; gap: 2px">
+            <p style="margin: 0; font-size: 15px; font-weight: 700; color: #12203c">有限会社seeds</p>
+            <p style="margin: 0; font-size: 14px; color: #3d4658">マネージャー</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="contact-cta">
-      <a class="btn btn-primary" style="color:var(--navy);" href="tel:09031715064"><span class="ja">今すぐ電話</span><span class="en">Call Now</span></a>
-      <a class="btn" style="background:var(--navy);color:#fff;" href="mailto:kinoshita@kpllc.jp"><span class="ja">メールで問い合わせ</span><span class="en">Contact by Email</span></a>
+  </section>
+
+  <section id="flow">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 48px">
+      <div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+        <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: #7d5f17">FLOW</p>
+        <h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 38px); font-weight: 900; line-height: 1.5; color: #12203c">ご相談の流れ</h2>
+      </div>
+      <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 20px">
+        <li style="flex: 1 1 230px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+          <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #7d5f17">STEP 1</p>
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #12203c">お問い合わせ</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">メールで、いまのお困りごとをお聞かせください。</p>
+        </li>
+        <li style="flex: 1 1 230px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+          <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #7d5f17">STEP 2</p>
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #12203c">初回面談</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">決算書や試算表を拝見しながら、会社の現状をうかがいます。</p>
+        </li>
+        <li style="flex: 1 1 230px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+          <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #7d5f17">STEP 3</p>
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #12203c">ご提案</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">支援の内容と進め方、費用をご提案します。</p>
+        </li>
+        <li style="flex: 1 1 230px; background: #ffffff; border: 1px solid #dfe3ea; border-radius: 4px; padding: 26px 24px; display: flex; flex-direction: column; gap: 8px">
+          <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.14em; color: #7d5f17">STEP 4</p>
+          <h3 style="margin: 0; font-size: 18px; font-weight: 700; color: #12203c">顧問スタート</h3>
+          <p style="margin: 0; font-size: 14px; color: #3d4658">ご契約後、月次の数字づくりとミーティングを始めます。</p>
+        </li>
+      </ol>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>
-  <span class="ja">&copy; 2026 KP合同会社 木下輝彦</span>
-  <span class="en">&copy; 2026 Teruhiko Kinoshita / KP LLC</span>
-</footer>
+  <section id="company" style="background: #ffffff">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 96px 24px; display: flex; flex-direction: column; gap: 40px">
+      <div style="display: flex; flex-direction: column; gap: 14px">
+        <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: #7d5f17">COMPANY</p>
+        <h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 38px); font-weight: 900; line-height: 1.5; color: #12203c">会社概要</h2>
+      </div>
+      <dl style="margin: 0; display: flex; flex-direction: column; max-width: 860px">
+        <div style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-top: 1px solid #dfe3ea">
+          <dt style="flex: none; width: 120px; font-size: 14px; font-weight: 700; color: #12203c">商号</dt>
+          <dd style="margin: 0; flex: 1 1 260px; font-size: 15px">KP合同会社（KP LLC）</dd>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-top: 1px solid #dfe3ea">
+          <dt style="flex: none; width: 120px; font-size: 14px; font-weight: 700; color: #12203c">代表者</dt>
+          <dd style="margin: 0; flex: 1 1 260px; font-size: 15px">Managing Partner　木下 輝彦</dd>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-top: 1px solid #dfe3ea">
+          <dt style="flex: none; width: 120px; font-size: 14px; font-weight: 700; color: #12203c">設立</dt>
+          <dd style="margin: 0; flex: 1 1 260px; font-size: 15px">2022年6月</dd>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-top: 1px solid #dfe3ea">
+          <dt style="flex: none; width: 120px; font-size: 14px; font-weight: 700; color: #12203c">事務所</dt>
+          <dd style="margin: 0; flex: 1 1 260px; font-size: 15px">〒731-0103　広島市安佐南区緑井2丁目8-6　Y'z B.L.D midorii 303号室</dd>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-top: 1px solid #dfe3ea">
+          <dt style="flex: none; width: 120px; font-size: 14px; font-weight: 700; color: #12203c">本店</dt>
+          <dd style="margin: 0; flex: 1 1 260px; font-size: 15px">〒731-0154　広島市安佐南区上安二丁目2番39-17号</dd>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-top: 1px solid #dfe3ea">
+          <dt style="flex: none; width: 120px; font-size: 14px; font-weight: 700; color: #12203c">事業内容</dt>
+          <dd style="margin: 0; flex: 1 1 260px; font-size: 15px">経営コンサルティング、M&amp;Aアドバイザリー</dd>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 4px 24px; padding: 16px 0; border-top: 1px solid #dfe3ea; border-bottom: 1px solid #dfe3ea">
+          <dt style="flex: none; width: 120px; font-size: 14px; font-weight: 700; color: #12203c">メール</dt>
+          <dd style="margin: 0; flex: 1 1 260px; font-size: 15px"><a href="mailto:kinoshita@kpllc.jp">kinoshita@kpllc.jp</a></dd>
+        </div>
+      </dl>
+    </div>
+  </section>
 
-<script>
-  function toggleLang(){
-    document.body.classList.toggle('lang-en');
-  }
-</script>
+  <section id="contact" style="background: #12203c; color: #ffffff">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 88px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 36px">
+      <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+        <p style="margin: 0; font-size: 13px; font-weight: 700; letter-spacing: 0.2em; color: #c9a24a">CONTACT</p>
+        <h2 style="margin: 0; font-size: clamp(26px, 3.4vw, 38px); font-weight: 900; line-height: 1.5">まずは、数字を見せてください。</h2>
+        <p style="margin: 0; font-size: 16px; color: #d5dbe8">顧問先は30社までに限らせていただいています。お早めにご相談ください。</p>
+      </div>
+      <div style="flex: 0 1 320px; display: flex; flex-direction: column; gap: 14px">
+        <a href="mailto:kinoshita@kpllc.jp" style="display: block; text-align: center; text-decoration: none; padding: 16px 28px; border-radius: 4px; font-weight: 700; font-size: 17px; color: #12203c; background: #c9a24a">メールで相談する</a>
+        <p style="margin: 0; text-align: center; font-size: 15px; letter-spacing: 0.04em; color: #d5dbe8">kinoshita@kpllc.jp</p>
+      </div>
+    </div>
+  </section>
 
+  <footer style="background: #0c172d; color: #d5dbe8">
+    <div style="max-width: 1120px; margin: 0 auto; padding: 32px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+      <div style="display: flex; align-items: center; gap: 12px">
+        <img src="assets/kp-logo-light.png" alt="" aria-hidden="true" style="height: 36px; width: auto; display: block">
+        <span style="font-size: 14px; font-weight: 700; letter-spacing: 0.06em">KP合同会社</span>
+      </div>
+      <p style="margin: 0; font-size: 13px">&copy; 2026 KP合同会社</p>
+    </div>
+  </footer>
+
+</div>
 </body>
 </html>
